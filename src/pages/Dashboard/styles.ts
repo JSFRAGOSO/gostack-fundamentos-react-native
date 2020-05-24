@@ -7,7 +7,6 @@ interface Product {
   image_url: string;
   price: number;
 }
-
 export const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;

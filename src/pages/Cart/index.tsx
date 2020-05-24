@@ -3,6 +3,8 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 
 import { View } from 'react-native';
 
+import FloatingCart from '../../components/FloatingCart';
+
 import {
   Container,
   ProductContainer,
@@ -40,22 +42,33 @@ const Cart: React.FC = () => {
 
   function handleIncrement(id: string): void {
     // TODO
+    increment(id);
   }
 
   function handleDecrement(id: string): void {
     // TODO
+    decrement(id);
   }
 
   const cartTotal = useMemo(() => {
     // TODO RETURN THE SUM OF THE QUANTITY OF THE PRODUCTS IN THE CART
+    const totalPrice = products.reduce(
+      (accumulator: number, product) =>
+        (accumulator += product.price * product.quantity),
+      0,
+    );
 
-    return formatValue(0);
+    return formatValue(totalPrice);
   }, [products]);
 
   const totalItensInCart = useMemo(() => {
     // TODO RETURN THE SUM OF THE QUANTITY OF THE PRODUCTS IN THE CART
+    const totalQuantity = products.reduce(
+      (accumulator: number, product) => (accumulator += product.quantity),
+      0,
+    );
 
-    return 0;
+    return totalQuantity;
   }, [products]);
 
   return (
@@ -105,6 +118,7 @@ const Cart: React.FC = () => {
           )}
         />
       </ProductContainer>
+
       <TotalProductsContainer>
         <FeatherIcon name="shopping-cart" color="#fff" size={24} />
         <TotalProductsText>{`${totalItensInCart} itens`}</TotalProductsText>
@@ -113,5 +127,4 @@ const Cart: React.FC = () => {
     </Container>
   );
 };
-
 export default Cart;
